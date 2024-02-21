@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Encomendas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="#">Cadastros</a></li>
+    <li class="breadcrumb-item active">Encomendas</li>
+</ol>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i> Lista de Encomendas
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-success" type="button" onclick="abrirModal(null)">Criar Novo</button>
+            </div>
+        </div>
+
+        <hr />
+        <table id="tabla" class="display responsive" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Total Produtos </th>
+                    <th>Localização</th>
+                    <th>Valor Total</th>
+                    <th>Data de Encomenda</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var tabladata;
+
+        $(document).ready(function () {
+            tabladata = $('#tabla').DataTable({
+                responsive: true,
+                "ajax": {
+                    "url": '@Url.Action("ListarEncomenda", "Home")',
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Nomes" },
+                    { "data": "Telefone" },
+                    { "data": "TotalProduto" },
+                    { "data": "Direcao" },
+                    { "data": "Total" },
+                    { "data": "DataCompra" },
+                    {
+                        "data": "IdCompra", "render": function (data, type, row, meta) {
+                            return $("<button>").addClass("btn btn-primary btn-editar btn-sm").append(
+                                $("<i>").addClass("fas fa-pen")
+                            ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML +
+                                $("<button>").addClass("btn btn-danger btn-eliminar btn-sm ms-2").append(
+                                    $("<i>").addClass("fas fa-trash")
+                                ).attr({ "data-informacion": JSON.stringify(row) })[0].outerHTML;
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px"
+                    }
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/pt_br.json"
+                }
+            });
+        });
+
+    </script>
+}
