@@ -125,7 +125,8 @@
                                         $("<div>").addClass("d-grid d-md-grid gap-2 d-md-block align-items-center text-center").append(
                                             $("<button>").addClass("btn btn-outline-dark mt-auto btn-detalle").text("Ver Detalhe").attr({ "data-elemento": JSON.stringify(item) }),
                                            @{
-                                               if (((ProyectoTest.Models.Usuario)Session["Usuario"]).EsAdministrador == false) {
+                                               if ((ProyectoTest.Models.Usuario)Session["Usuario"] == null || ((ProyectoTest.Models.Usuario)Session["Usuario"]).EsAdministrador == false)
+                                               {
                                                     @:$("<button>").addClass("btn btn-outline-dark mt-auto btn-agregar-carrito").data("idproducto", item.IdProducto).text("Adicionar ao Carrinho")
                                                }
                                            }

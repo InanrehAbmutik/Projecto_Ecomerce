@@ -58,7 +58,7 @@ namespace ProyectoTest.Controllers
 
             FormsAuthentication.SetAuthCookie(oUsuario.Correo, false);
             Session["Usuario"] = oUsuario;
-
+            Root.user = oUsuario;
             if (oUsuario.EsAdministrador == true)
             {
                 return RedirectToAction("Index", "Home");

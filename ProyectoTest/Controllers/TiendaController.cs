@@ -16,10 +16,10 @@ namespace ProyectoTest.Controllers
         //VISTA
         public ActionResult Index()
         {
-            if (Session["Usuario"] == null)
-                return RedirectToAction("Index", "Login");
-            else
-                oUsuario = (Usuario)Session["Usuario"];
+            //if (Session["Usuario"] == null)
+            //    return RedirectToAction("Index", "Login");
+            //else
+            //    oUsuario = (Usuario)Session["Usuario"];
 
             return View();
         }
@@ -178,6 +178,7 @@ namespace ProyectoTest.Controllers
         public ActionResult CerrarSesion() {
             FormsAuthentication.SignOut();
             Session["Usuario"] = null;
+            Root.user= null;
             return RedirectToAction("Index", "Login");
         }
 

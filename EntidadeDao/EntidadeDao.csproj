@@ -66,6 +66,7 @@
     <Compile Include="RepositorioGenerico.cs" />
     <Compile Include="Infra\IGeneric.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Root.cs" />
     <Compile Include="sysdiagram.cs" />
     <Compile Include="USUARIO.cs" />
   </ItemGroup>
